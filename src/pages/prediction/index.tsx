@@ -23,7 +23,7 @@ const Prediction = () => {
             <input
               type='text'
               placeholder='Type here'
-              className='input input-bordered w-full max-w-xs mb-4 input-secondary'
+              className='input input-bordered w-full max-w-xs mb-4 input-secondary text-zinc-900'
             />
           </div>
           <button className='btn btn-primary'>Submit</button>
