@@ -33,15 +33,15 @@ const Teams = () => {
     <>
       <h1 className='mb-5 text-5xl font-bold'>{`Today's matches`}</h1>
       <p className='mb-5'>
-        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-        excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a
-        id nisi.
+        Here you can find the games that will take place on this day. In the
+        prediction box you can add your prediction of all the games that will
+        take place on this day.
       </p>
 
       {nbaTeams.map((match) => {
         return (
           <>
-            <div className='flex  w-full lg:flex-row  mb-5'>
+            <div className='flex w-full lg:flex-row  mb-5'>
               <div className='grid w-20 flex-grow h-16 card bg-base-300 rounded-box place-items-center text-zinc-900 font-bold'>
                 {match.name}
               </div>
