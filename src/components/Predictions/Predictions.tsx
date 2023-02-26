@@ -1,10 +1,15 @@
 import { toast } from 'react-hot-toast';
 import React, { useState } from 'react';
 
-const Predictions = () => {
+const Predictions = ({
+  showPrediction,
+  show,
+}: {
+  showPrediction: (show: boolean) => void;
+  show: boolean;
+}) => {
   const [totalResult, setTotalResult] = useState<boolean>(false);
   const [prediction, setPrediction] = useState<number>(0);
-  const [showPrediction, setShowPrediction] = useState<boolean>(false);
 
   const handleClickPredictionResult = () => {
     setTotalResult(true);
@@ -19,11 +24,11 @@ const Predictions = () => {
     if (prediction <= 0) {
       return toast.error('A number prediction is required');
     }
-    setShowPrediction(true);
+    showPrediction(true);
   };
 
   const showResults = () => {
-    if (showPrediction && !totalResult) {
+    if (show && !totalResult) {
       return (
         <div className='hero-content text-center text-neutral-content flex flex-col'>
           <label className='label '>
