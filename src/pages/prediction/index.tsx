@@ -1,4 +1,4 @@
-import Predictions from '@/components/Predictions/Predictions';
+import Teams from '@/components/Teams/Teams';
 import React from 'react';
 
 const Prediction = () => {
@@ -13,7 +13,7 @@ const Prediction = () => {
 
       <div className='hero-content text-center text-neutral-content'>
         <div className='max-w-md'>
-          <Predictions />
+          <Teams />
           <div>
             <label className='label'>
               <span className='label-text text-white font-bold text-lg '>

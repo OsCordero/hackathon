@@ -28,7 +28,7 @@ const nbaTeams = [
   },
 ];
 
-const Predictions = () => {
+const Teams = () => {
   return (
     <>
       <h1 className='mb-5 text-5xl font-bold'>{`Today's matches`}</h1>
@@ -57,4 +57,4 @@ const Predictions = () => {
   );
 };
 
-export default Predictions;
+export default Teams;
