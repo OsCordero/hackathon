@@ -6,7 +6,7 @@ const Prediction = () => {
     <div
       className='hero min-h-screen'
       style={{
-        backgroundImage: `url(./images/background-nba.png)`,
+        backgroundImage: `url(./images/background-orange-ball.jpg)`,
       }}
     >
       <div className='hero-overlay bg-opacity-60'></div>

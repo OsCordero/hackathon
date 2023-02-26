@@ -18,7 +18,7 @@ const nbaTeams = [
   },
   {
     id: 4,
-    name: 'Chicago Bulls',
+    name: 'Chicago Bulls Chicago Bulls Chicago Bulls',
     match: 'New York Knicks',
   },
   {
@@ -41,12 +41,12 @@ const Predictions = () => {
       {nbaTeams.map((match) => {
         return (
           <>
-            <div className='flex flex-col w-full lg:flex-row mb-5'>
-              <div className='grid flex-grow h-16 card bg-base-300 rounded-box place-items-center text-zinc-900 font-bold'>
+            <div className='flex  w-full lg:flex-row  mb-5'>
+              <div className='grid w-20 flex-grow h-16 card bg-base-300 rounded-box place-items-center text-zinc-900 font-bold'>
                 {match.name}
               </div>
               <div className='divider lg:divider-horizontal'>VS</div>
-              <div className='grid flex-grow h-16 card bg-base-300 rounded-box place-items-center text-zinc-900 font-bold'>
+              <div className='grid w-20 flex-grow h-16 card bg-base-300 rounded-box place-items-center text-zinc-900 font-bold'>
                 {match.match}
               </div>
             </div>
