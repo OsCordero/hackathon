@@ -1,6 +1,21 @@
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { useFclContext } from "@/context/FclContext";
+import logo from "../../../public/images/logo.png";
+import Image from "next/image";
 
 const Navbar = () => {
+  const { data: session } = useSession();
+  const { connect, currentUser, logout } = useFclContext();
+
+  const handleSignIn = () => {
+    signIn();
+  };
+
+  const handleSignOut = () => {
+    signOut();
+  };
+
   return (
     <div className="navbar bg-base-100 fixed">
       <div className="navbar-start">
@@ -26,52 +41,50 @@ const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a href="#">Item 1</a>
-            </li>
-            <li tabIndex={0}>
-              <a className="justify-between">
-                Parent
-                <svg
-                  className="fill-current"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
-                </svg>
-              </a>
-              <ul className="p-2">
-                <li>
-                  <a href="#">Submenu 1</a>
-                </li>
-                <li>
-                  <a href="#">Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a href="#">Item 3</a>
+              <Link className="btn btn-ghost text-xl" href="/prediction">
+                Predictions
+              </Link>
             </li>
           </ul>
         </div>
-        <Link className="btn btn-ghost normal-case text-xl" href="/">
-          daisyUI
+        <Link className="btn btn-ghost text-xl hidden sm:inline-flex" href="/">
+          <Image src={logo} alt="logo" width="50" />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a href="#">Item 1</a>
-          </li>
-
-          <li>
-            <a href="#">Item 3</a>
+            <Link className="btn btn-ghost text-xl" href="/prediction">
+              Predictions
+            </Link>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn btn-primary">Get started</a>
+        {session ? (
+          <>
+            {currentUser?.addr ? (
+              <button
+                className="btn btn-outline btn-primary mr-3"
+                onClick={logout}
+              >
+                {currentUser?.addr}
+              </button>
+            ) : (
+              <button className="btn btn-outline btn-primary" onClick={connect}>
+                Connect flow wallet
+              </button>
+            )}
+
+            <button className="btn btn-ghost" onClick={handleSignOut}>
+              Logout
+            </button>
+          </>
+        ) : (
+          <button className="btn btn-primary" onClick={handleSignIn}>
+            Login
+          </button>
+        )}
       </div>
     </div>
   );

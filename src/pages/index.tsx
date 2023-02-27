@@ -2,10 +2,14 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
+import { signIn } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
+  const handleSignIn = () => {
+    signIn(undefined, { callbackUrl: "/prediction" });
+  };
   return (
     <>
       <Head>
@@ -19,7 +23,7 @@ export default function Home() {
         <div
           className="hero min-h-screen"
           style={{
-            backgroundImage: `url("https://images.unsplash.com/photo-1504450758481-7338eba7524a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80")`,
+            backgroundImage: `url(./images/background-ia-home.jpeg)`,
           }}
         >
           <div className="hero-overlay bg-opacity-60"></div>
@@ -29,7 +33,9 @@ export default function Home() {
                 Hello there
               </h1>
               <p className="mb-5 text-white text-xl">Login to start playing</p>
-              <button className="btn btn-primary">Login with metamask</button>
+              <button className="btn btn-primary" onClick={handleSignIn}>
+                Login with google
+              </button>
             </div>
           </div>
         </div>
