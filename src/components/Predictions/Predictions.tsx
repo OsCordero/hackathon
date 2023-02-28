@@ -1,5 +1,8 @@
-import { toast } from "react-hot-toast";
-import React, { useState } from "react";
+import { toast } from 'react-hot-toast';
+import React, { useState } from 'react';
+import { useFclContext } from '@/context/FclContext';
+import { useSession } from 'next-auth/react';
+import { useSetPrediction } from '@/hooks/usePredictions';
 
 const Predictions = ({
   showPrediction,
@@ -11,6 +14,10 @@ const Predictions = ({
   const [totalResult, setTotalResult] = useState<boolean>(false);
   const [prediction, setPrediction] = useState<number>(0);
 
+  const { data: session } = useSession();
+  const { currentUser } = useFclContext();
+  const { mutateAsync, isLoading } = useSetPrediction();
+
   const handleClickPredictionResult = () => {
     setTotalResult(true);
   };
@@ -19,10 +26,32 @@ const Predictions = ({
     setPrediction(e.target.value);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (prediction <= 0) {
-      return toast.error("A number prediction is required");
+      return toast.error('A number prediction is required');
+    }
+    if (session?.user?.email && currentUser?.addr) {
+      try {
+        await mutateAsync({
+          email: session?.user?.email,
+          address: currentUser?.addr,
+          prediction: prediction.toString(),
+        });
+        return toast.success('Prediction set successfully', {
+          style: { padding: '16px' },
+        });
+      } catch (error: any) {
+        if (error.response.data.statusCode === 500) {
+          return toast.error('Server error');
+        }
+        error.response.data.error &&
+          Object.values(error.response.data.message).map((error: any) =>
+            toast.error(error)
+          );
+
+        return;
+      }
     }
     showPrediction(true);
   };

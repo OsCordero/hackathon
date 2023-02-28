@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { useFclContext } from "@/context/FclContext";
-import logo from "../../../public/images/logo.png";
-import Image from "next/image";
+import Link from 'next/link';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { useFclContext } from '@/context/FclContext';
+import logo from '../../../public/images/logo2.png';
+import Image from 'next/image';
 
 const Navbar = () => {
   const { data: session } = useSession();
