@@ -1,5 +1,5 @@
-import { toast } from 'react-hot-toast';
-import React, { useState } from 'react';
+import { toast } from "react-hot-toast";
+import React, { useState } from "react";
 
 const Predictions = ({
   showPrediction,
@@ -22,7 +22,7 @@ const Predictions = ({
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (prediction <= 0) {
-      return toast.error('A number prediction is required');
+      return toast.error("A number prediction is required");
     }
     showPrediction(true);
   };
@@ -30,21 +30,21 @@ const Predictions = ({
   const showResults = () => {
     if (show && !totalResult) {
       return (
-        <div className='hero-content text-center text-neutral-content flex flex-col'>
-          <label className='label '>
-            <span className='label-text text-white font-bold text-2xl '>
+        <div className=" text-center text-neutral-content flex flex-col">
+          <label className="label ">
+            <span className="label-text text-white font-bold text-2xl ">
               Your predition:
             </span>
           </label>
-          <div className='grid w-20 flex-grow h-16 card bg-base-300 rounded-box place-items-center text-zinc-900 font-bold'>
+          <div className="grid w-20 flex-grow h-16 card bg-base-300 rounded-box place-items-center text-zinc-900 font-bold">
             500
           </div>
           <br />
-          <span className='label-text text-white font-bold text-2xl '>
+          <span className="label-text text-white font-bold text-2xl ">
             Your won 100 points!
           </span>
           <button
-            className='btn btn-primary'
+            className="btn btn-primary"
             onClick={handleClickPredictionResult}
           >
             Go to see all your todays predictions
@@ -54,13 +54,13 @@ const Predictions = ({
     }
     if (totalResult) {
       return (
-        <div className='hero-content text-center text-neutral-content flex flex-col'>
-          <label className='label '>
-            <span className='label-text text-white font-bold text-2xl '>
+        <div className=" text-center text-neutral-content flex flex-col">
+          <label className="label ">
+            <span className="label-text text-white font-bold text-2xl ">
               Your todays preditions:
             </span>
           </label>
-          <div className='grid w-20 flex-grow h-16 card bg-base-300 rounded-box place-items-center text-zinc-900 font-bold'>
+          <div className="grid w-20 flex-grow h-16 card bg-base-300 rounded-box place-items-center text-zinc-900 font-bold">
             500
           </div>
         </div>
@@ -69,19 +69,19 @@ const Predictions = ({
     return (
       <form onSubmit={handleSubmit}>
         <div>
-          <label className='label'>
-            <span className='label-text text-white font-bold text-lg '>
+          <label className="label">
+            <span className="label-text text-white font-bold text-lg ">
               Predicted results:
             </span>
           </label>
           <input
-            type='number'
+            type="number"
             onChange={handleChange}
-            placeholder='Type here your prediction'
-            className='input input-bordered w-full max-w-xs mb-4 input-secondary text-zinc-900'
+            placeholder="Type here your prediction"
+            className="input input-bordered w-full mb-4 input-secondary text-zinc-900"
           />
         </div>
-        <button className='btn btn-primary' type='submit'>
+        <button className="btn btn-primary" type="submit">
           Submit
         </button>
       </form>
