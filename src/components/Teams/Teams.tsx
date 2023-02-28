@@ -49,7 +49,7 @@ const Teams = ({ show }: { show: boolean }) => {
 
       {games?.map((game: Game) => {
         return (
-          <>
+          <div key={game.id}>
             <div className="flex w-full lg:flex-row  mb-5">
               <div className="grid w-20 flex-grow h-16 card bg-base-300 rounded-box place-items-center text-zinc-900 font-bold">
                 {game.away.name}
@@ -64,7 +64,7 @@ const Teams = ({ show }: { show: boolean }) => {
                 </div>
               )}
             </div>
-          </>
+          </div>
         );
       })}
     </>

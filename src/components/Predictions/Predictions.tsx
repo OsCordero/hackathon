@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useFclContext } from '@/context/FclContext';
 import { useSession } from 'next-auth/react';
 import { useSetPrediction } from '@/hooks/usePredictions';
+import { useGetRounds } from '@/hooks/useRounds';
 
 const Predictions = ({
   showPrediction,
@@ -11,12 +12,16 @@ const Predictions = ({
   showPrediction: (show: boolean) => void;
   show: boolean;
 }) => {
-  const [totalResult, setTotalResult] = useState<boolean>(false);
-  const [prediction, setPrediction] = useState<number>(0);
-
+  const { data } = useGetRounds();
   const { data: session } = useSession();
   const { currentUser } = useFclContext();
   const { mutateAsync, isLoading } = useSetPrediction();
+
+  const [totalResult, setTotalResult] = useState<boolean>(false);
+  const [prediction, setPrediction] = useState<number>(0);
+
+  // @ts-ignore;
+  const endDate = data?.endDate;
 
   const handleClickPredictionResult = () => {
     setTotalResult(true);
@@ -98,6 +103,11 @@ const Predictions = ({
     return (
       <form onSubmit={handleSubmit}>
         <div>
+          <label className="label">
+            <span className="label-text text-orange-700 font-bold text-lg ">
+              You have until {endDate} to send your prediction
+            </span>
+          </label>
           <label className="label">
             <span className="label-text text-white font-bold text-lg ">
               Predicted results:
