@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { useFclContext } from "@/context/FclContext";
-import logo from "../../../public/images/logo.png";
-import Image from "next/image";
+import Link from 'next/link';
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { useFclContext } from '@/context/FclContext';
+import logo from '../../../public/images/logo2.png';
+import Image from 'next/image';
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -17,7 +17,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100 fixed">
+    <div className="navbar bg-base-100 fixed z-[100]">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
