@@ -1,6 +1,6 @@
 import { Prediction } from '@/types/predictions';
 import axios from 'axios';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
 const useSetPrediction = () => {
   return useMutation(({ email, address, prediction }: Prediction) =>
@@ -12,4 +12,15 @@ const useSetPrediction = () => {
   );
 };
 
-export { useSetPrediction };
+const useGetUserPrediction = () => {
+  return useMutation(({ email }: { email: string | null | undefined }) =>
+    axios.post(
+      `${process.env.NEXT_PUBLIC_BASE_URL}users/get-user-predictions`,
+      {
+        email,
+      }
+    )
+  );
+};
+
+export { useSetPrediction, useGetUserPrediction };
