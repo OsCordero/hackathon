@@ -16,17 +16,13 @@ const Predictions = ({
   const { data: session } = useSession();
   const { currentUser } = useFclContext();
   const { mutateAsync, isLoading } = useSetPrediction();
-  const { data: userPrediction, mutate } = useGetUserPrediction();
-  const predictedValue = userPrediction?.data.prediction;
+  const { data: userPrediction } = useGetUserPrediction({
+    email: session?.user?.email,
+  });
+  const predictedValue = userPrediction?.data?.prediction;
 
   const [totalResult, setTotalResult] = useState<boolean>(false);
   const [prediction, setPrediction] = useState<number>(0);
-
-  useEffect(() => {
-    if (session?.user?.email) {
-      mutate({ email: session?.user?.email });
-    }
-  }, [session?.user?.email]);
 
   // @ts-ignore;
   const endDate = data?.endDate;

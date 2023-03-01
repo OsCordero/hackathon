@@ -12,15 +12,17 @@ const useSetPrediction = () => {
   );
 };
 
-const useGetUserPrediction = () => {
-  return useMutation(({ email }: { email: string | null | undefined }) =>
-    axios.post(
-      `${process.env.NEXT_PUBLIC_BASE_URL}users/get-user-predictions`,
-      {
-        email,
-      }
-    )
-  );
+const useGetUserPrediction = ({
+  email,
+}: {
+  email: string | undefined | null;
+}) => {
+  return useQuery(['prediction'], async () => {
+    const result = await axios.get(
+      `${process.env.NEXT_PUBLIC_BASE_URL}users/get-user-predictions?email=${email}`
+    );
+    return result.data;
+  });
 };
 
 export { useSetPrediction, useGetUserPrediction };
