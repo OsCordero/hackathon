@@ -2,7 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import Navbar from "@/components/Navbar/Navbar";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,6 +11,8 @@ export default function Home() {
   const handleSignIn = () => {
     signIn(undefined, { callbackUrl: "/prediction" });
   };
+  const session = useSession();
+
   return (
     <>
       <Head>
@@ -29,13 +32,26 @@ export default function Home() {
           <div className="hero-overlay bg-opacity-60"></div>
           <div className="hero-content text-center text-neutral-content">
             <div className="max-w-md">
-              <h1 className="mb-5 text-5xl font-bold text-white">
-                Hello there
+              <h1 className="mb-5 text-5xl font-bold text-white capitalize ">
+                Hello there {session?.data?.user?.name}
               </h1>
-              <p className="mb-5 text-white text-xl">Login to start playing</p>
-              <button className="btn btn-primary" onClick={handleSignIn}>
-                Login with google
-              </button>
+              {session.status !== "authenticated" ? (
+                <>
+                  <p className="mb-5 text-white text-xl">
+                    Login to start playing
+                  </p>
+                  <button className="btn btn-primary" onClick={handleSignIn}>
+                    Login with google
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p className="mb-5 text-white text-xl">Start playing</p>
+                  <Link className="btn btn-primary" href="/prediction">
+                    Start playing
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
